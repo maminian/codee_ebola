@@ -1,23 +1,31 @@
 import json
 import pandas
 import numpy as np
-from matplotlib import pyplot,ticker
+from matplotlib import pyplot,ticker,rcParams
 import datetime
 
 ############
 
-cases_palette = [pyplot.cm.tab20(2*j+1) for j in range(5)]
-pred_palette = [pyplot.cm.tab20(2*j) for j in range(5)]
+rcParams['font.size'] = 12
+
+cases_palette = np.array([pyplot.cm.tab20(2*j+1) for j in range(5)])
+pred_palette = np.array([pyplot.cm.tab20(2*j) for j in range(5)])
 
 COUNTRIES = ['SierraLeone','Liberia','Guinea','Nigeria','Senegal']
 ALPHAS = [1,1,0.4,0.4,0.4]  # lessen visual clutter of countries not being highlighted.
+
+def color_op(vec):
+    return np.array(vec)**0.25
+
+
+################
+
+
 
 with open('country_timeseries.json', 'r') as ff:
     data_j = json.load(ff)
 #
 
-
-################
 
 headers = list( data_j[0].keys() )
 
@@ -104,12 +112,12 @@ for j,(h,bgcol) in enumerate(zip(COUNTRIES,cases_palette)):  # using pred_palett
         ha='left', 
         va='bottom', 
         annotation_clip=False,
-        bbox={'color':bgcol, 'alpha':1, 'edgecolor':None, 'boxstyle':'round'},
+        bbox={'facecolor':color_op(bgcol), 'alpha':1, 'edgecolor':bgcol, 'boxstyle':'round'},
         rotation=45
         )
     
     if h=='Nigeria': # one-off correction for overlapping Senegal/Nigeria cases.
-        yy += 450
+        yy += 475
     # Liberia needs to be shifted back for ax[0] if we use 45 degree rotation.
     if h=='Liberia':
         yy -= 1e3
@@ -119,7 +127,7 @@ for j,(h,bgcol) in enumerate(zip(COUNTRIES,cases_palette)):  # using pred_palett
         ha='left', 
         va='bottom', 
         annotation_clip=False,
-        bbox={'color':bgcol, 'alpha':1, 'edgecolor':None, 'boxstyle':'round'},
+        bbox={'facecolor':color_op(bgcol), 'alpha':1, 'edgecolor':bgcol, 'boxstyle':'round'},
         rotation=45
         )
 #
