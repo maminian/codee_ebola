@@ -10,7 +10,7 @@ cases_palette = [pyplot.cm.tab20(2*j+1) for j in range(5)]
 pred_palette = [pyplot.cm.tab20(2*j) for j in range(5)] # only needed for sierraleone and liberia.
 
 COUNTRIES = ['SierraLeone','Liberia','Guinea','Nigeria','Senegal']
-ALPHAS = [1,1,0.2,0.2,0.2]  # lessen visual clutter of countries not being highlighted.
+ALPHAS = [1,1,0.4,0.4,0.4]  # lessen visual clutter of countries not being highlighted.
 
 with open('country_timeseries.json', 'r') as ff:
     data_j = json.load(ff)
@@ -89,8 +89,31 @@ ax[1].set_xlabel('Date')
 ax[1].set_ylabel('Cases')
 ax[0].legend(loc='upper left')
 
+# Label curves with text annotation.
+for j,(h,bgcol) in enumerate(zip(COUNTRIES,cases_palette)):
+#    ax[1].plot(df['Date'].values, df[h].values, c=col, lw=2, marker='d',label=h, alpha=alf)
+    xx = df['Date'].values[-1]
+    yy = df['Cases_'+h].values[-1]
+        
+    ax[1].annotate(h, (xx,yy), 
+        fontsize=9, 
+        ha='left', 
+        va='bottom', 
+        annotation_clip=False,
+        bbox={'color':np.sqrt(np.array(bgcol)), 'alpha':1, 'edgecolor':None, 'boxstyle':'round'}
+        )
+    
+    ax[0].annotate(h, (xx,yy), 
+        fontsize=9, 
+        ha='left', 
+        va='bottom', 
+        annotation_clip=False,
+        bbox={'color':np.sqrt(np.array(bgcol)), 'alpha':1, 'edgecolor':None, 'boxstyle':'round'}
+        )
+#
+
 
 if True:
     fig.savefig('cases_bycountry.png', dpi=120)
-
-
+#
+fig.show()
