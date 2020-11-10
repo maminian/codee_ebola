@@ -94,24 +94,33 @@ for j,(h,bgcol) in enumerate(zip(COUNTRIES,cases_palette)):  # using pred_palett
 #    ax[1].plot(df['Date'].values, df[h].values, c=col, lw=2, marker='d',label=h, alpha=alf)
     xx = df['Date'].values[-1]
     yy = df['Cases_'+h].values[-1]
-        
+    
+    # Liberia needs to be shifted in ax[1] if we use 45 degree rotation.
+    if h=='Liberia':
+        yy += 1e3
+    #
     ax[1].annotate(h, (xx,yy), 
-        fontsize=9, 
+        fontsize=11, 
         ha='left', 
         va='bottom', 
         annotation_clip=False,
-        bbox={'color':bgcol, 'alpha':1, 'edgecolor':None, 'boxstyle':'round'}
+        bbox={'color':bgcol, 'alpha':1, 'edgecolor':None, 'boxstyle':'round'},
+        rotation=45
         )
     
     if h=='Nigeria': # one-off correction for overlapping Senegal/Nigeria cases.
-        yy += 250
+        yy += 450
+    # Liberia needs to be shifted back for ax[0] if we use 45 degree rotation.
+    if h=='Liberia':
+        yy -= 1e3
     #
     ax[0].annotate(h, (xx,yy), 
-        fontsize=9, 
+        fontsize=11, 
         ha='left', 
         va='bottom', 
         annotation_clip=False,
-        bbox={'color':bgcol, 'alpha':1, 'edgecolor':None, 'boxstyle':'round'}
+        bbox={'color':bgcol, 'alpha':1, 'edgecolor':None, 'boxstyle':'round'},
+        rotation=45
         )
 #
 
