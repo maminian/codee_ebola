@@ -135,5 +135,6 @@ for j,(h,bgcol) in enumerate(zip(COUNTRIES,cases_palette)):  # using pred_palett
 
 if True:
     fig.savefig('cases_bycountry.png', dpi=120)
+    fig.savefig('cases_bycountry.pdf', dpi=120)
 #
 fig.show()
