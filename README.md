@@ -1,7 +1,7 @@
 ![A graph illustrating Ebola cases in 2014 by country](cases_bycountry.png)
 
 
-# Supplementary materials associated with a lesson plan for a math epidemiology project
+# Supplementary materials for a lesson plan for a math epidemiology project
 
 This repository contains the following:
 * `country_timeseries.json` -- a JSON file containing case and death data by country during the 2014 Ebola epidemic. This data is copied from https://github.com/cmrivers/ebola/tree/master/data_products
