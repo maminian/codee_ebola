@@ -20,3 +20,12 @@ To run the python script successfully, one needs a modern version of Python 3 wi
 * datetime 
 
 Depending on your environment (e.g. conda) most of these packages may come installed by default (especially the last two).
+
+# Citation
+If you found this code helpful, please cite the associated publication:
+
+Bernardi, F., & Aminian, M. (2021). Epidemiology and the sir model: Historical context to modern applications. CODEE Journal, 14(1), 4.
+
+[http://doi.org/10.5642/codee.202114.01.04](http://doi.org/10.5642/codee.202114.01.04)
+
+
